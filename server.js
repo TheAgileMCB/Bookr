@@ -4,17 +4,20 @@
 require('dotenv').config();
 
 const express = require('express');
+const pg = require('pg');
 const app = express();
 const cors = require('cors');
 const bookHandler = require('./modules/books');
 
 const PORT = process.env.PORT || 3000;
-
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', err => { throw err; });
 // set up apps and EJS
 app.use(cors());
 
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 
 app.get('/', (request, response) => {
@@ -34,8 +37,8 @@ client.connect()
   .then(() => {
     console.log('PG is listening!');
   })
-  .catch(err => {
-    next(err)
+  .catch((err, response) => {
+    handleError(err, response);
   });
 
 app.get('/', getTasks);
@@ -49,22 +52,24 @@ function getTasks(request, response) {
   const SQL = 'SELECT * FROM Tasks;';
 
   client.query(SQL)
-  .then(results => {
-    const { rowcount, row } = results;
-      console.log(rows);
+    .then(results => {
+      const { rowcount, rows } = results;
+      console.log(' / db result', rows);
 
       // response.send('rows')
       response.render('index', {
-        tasks: rows
+        books: rows
       });
-  })
-  .catch(err => {
-    handleError(err, response) {
-      let viewModel = {
-        error: err,
-
-      };
-      response.render('pages/error-view', viewModel);
-    }
-  })
+    })
+    .catch(err => {
+      handleError(err, response);
+    });
 }
+
+function handleError(err, response) {
+  let viewModel = {
+    error: err,
+  };
+  response.render('pages/error-view', viewModel);
+}
+
