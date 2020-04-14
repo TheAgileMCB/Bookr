@@ -8,6 +8,8 @@ const app = express();
 const cors = require('cors');
 const bookHandler = require('./modules/books');
 
+const PORT = process.env.PORT || 3000;
+
 // set up apps and EJS
 app.use(cors());
 
@@ -28,6 +30,41 @@ app.get('/searches/new', (request, response) => {
 app.post('/searches', bookHandler);
 
 // establish server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-console.log(`heard on ${PORT}`));
+client.connect()
+  .then(() => {
+    console.log('PG is listening!');
+  })
+  .catch(err => {
+    next(err)
+  });
+
+app.get('/', getTasks);
+
+app.get('*', (request, response) => response.status(404).send('This route does not exist'));
+
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+
+
+function getTasks(request, response) {
+  const SQL = 'SELECT * FROM Tasks;';
+
+  client.query(SQL)
+  .then(results => {
+    const { rowcount, row } = results;
+      console.log(rows);
+
+      // response.send('rows')
+      response.render('index', {
+        tasks: rows
+      });
+  })
+  .catch(err => {
+    handleError(err, response) {
+      let viewModel = {
+        error: err,
+
+      };
+      response.render('pages/error-view', viewModel);
+    }
+  })
+}
