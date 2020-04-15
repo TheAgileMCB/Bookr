@@ -1,5 +1,8 @@
 'use strict';
 require('dotenv').config();
+const client = require('../utility/database');
+const handleError = require('./error');
+
 
 const superagent = require('superagent');
 const BOOK_KEY = process.env.BOOK_KEY;
