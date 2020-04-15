@@ -4,14 +4,13 @@
 require('dotenv').config();
 
 const express = require('express');
-const pg = require('pg');
 const app = express();
 const cors = require('cors');
 const bookHandler = require('./modules/books');
+const client = require('./utility/database');
 
 const PORT = process.env.PORT || 3000;
-const client = new pg.Client(process.env.DATABASE_URL);
-client.on('error', err => { throw err; });
+
 // set up apps and EJS
 app.use(cors());
 

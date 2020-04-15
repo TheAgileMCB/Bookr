@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS books (
     isbn VARCHAR(20),
     image_url VARCHAR(255),
     summary VARCHAR(1000),
-    bookshelf VARCHAR(30),
+    bookshelf VARCHAR(30)
   );
