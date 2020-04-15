@@ -7,6 +7,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bookHandler = require('./modules/books');
+const handleError = require('./modules/error');
 const client = require('./utility/database');
 
 const PORT = process.env.PORT || 3000;
@@ -64,12 +65,5 @@ function getTasks(request, response) {
     .catch(err => {
       handleError(err, response);
     });
-}
-
-function handleError(err, response) {
-  let viewModel = {
-    error: err,
-  };
-  response.render('pages/error-view', viewModel);
 }
 
