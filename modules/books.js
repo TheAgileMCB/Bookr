@@ -18,7 +18,7 @@ function bookHandler(request, response, next) {
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
       });
-      response.send(bookResults);
+      response.render(bookResults);
       // response.render('pages/searches/show');
     })
     .catch(err => {
@@ -30,13 +30,14 @@ function bookHandler(request, response, next) {
 function Book(bookStats) {
   this.title = bookStats.volumeInfo.title ? bookStats.volumeInfo.title : 'Title does not exist';
   this.author = bookStats.volumeInfo.authors ? bookStats.volumeInfo.authors : 'Author does not exist';
+  this.ISBN = bookStats.volumeInfo.industryIndentifier.indentifier
+  this.summary = bookStats.volumeInfo.summary
+  this.image = bookStats.volumeInfo.imageLinks
+  
 
   // additional constructor data
   // grab image url and replace http route with https with regex
 
-  // this.publicationDate = 'mysteries of the universe',
-  // this.ISBN = 
-  // this.summary = 
 }
 
 module.exports = bookHandler;
