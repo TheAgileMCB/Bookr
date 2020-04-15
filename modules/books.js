@@ -1,5 +1,8 @@
 'use strict';
 require('dotenv').config();
+const client = require('../utility/database');
+const handleError = require('./error');
+
 
 const superagent = require('superagent');
 const BOOK_KEY = process.env.BOOK_KEY;
@@ -18,7 +21,7 @@ function bookHandler(request, response, next) {
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
       });
-      response.render(bookResults);
+      response.send(bookResults);
       // response.render('pages/searches/show');
     })
     .catch(err => {
@@ -26,18 +29,42 @@ function bookHandler(request, response, next) {
       next(err);
     });
 }
+
+
+// get books from database
+function getBooks(request, response) {
+  const SQL = 'SELECT * FROM books;';
+
+  client.query(SQL)
+    .then(results => {
+      const { rowcount, rows } = results;
+      console.log(' / db result', rows);
+
+      // response.send('rows')
+      response.render('index', {
+        books: rows
+      });
+    })
+    .catch(err => {
+      handleError(err, response);
+    });
+}
+
+
+
 // Book constructor!
 function Book(bookStats) {
   this.title = bookStats.volumeInfo.title ? bookStats.volumeInfo.title : 'Title does not exist';
   this.author = bookStats.volumeInfo.authors ? bookStats.volumeInfo.authors : 'Author does not exist';
-  this.ISBN = bookStats.volumeInfo.industryIndentifier.indentifier
-  this.summary = bookStats.volumeInfo.summary
-  this.image = bookStats.volumeInfo.imageLinks
-  
+  this.isbn = bookStats.volumeInfo.industryIdentifiers ? `${bookStats.volumeInfo.industryIdentifiers[0].identifier}` : 'No ISBN available at this time, we are working on setting this up.';
+  this.summary = bookStats.volumeInfo.description;
+  this.image = bookStats.volumeInfo.imageLinks;
 
-  // additional constructor data
   // grab image url and replace http route with https with regex
 
 }
 
-module.exports = bookHandler;
+module.exports = {
+  bookHandler,
+  getBooks,
+};

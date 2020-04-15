@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Title!</title>
-  <!-- <link rel="stylesheet" href="public/css/base.css"> -->
-  <!-- <link rel="stylesheet" href="public/css/style.css"> -->
+  <title>Search</title>
+  <link rel="stylesheet" href="../../../public/css/reset.css">
+  <link rel="stylesheet" href="../../../public/css/base.css">
 </head>
 <body>
   <header id="header">
@@ -19,12 +19,12 @@
   </header>
   <main id="main-content">
 
-    <form action="/searches" method="post">
+    <form action="/searches" method="POST">
       <fieldset>
         <legend>Book Search</legend>
         <label>
           <span>Enter Search Term(s):</span>
-          <input type="text" name="searchTerm" />
+          <input type="text" name="searchTerm" placeholder="Search by title or author here!" required/>
         </label>
       </fieldset>
       <fieldset>
@@ -37,7 +37,7 @@
           <input type="radio" id="author" name="radio" value="author" />
         </label>
       </fieldset>
-      <button type="submit">Search the libraries of h umanity!</button>
+      <button type="submit">Search the libraries of humanity!</button>
     </form>
 
   </main>
