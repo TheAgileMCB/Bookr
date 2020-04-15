@@ -8,7 +8,6 @@ const app = express();
 const cors = require('cors');
 const bookModule = require('./modules/books');
 const {bookHandler, getBooks} = bookModule;
-const handleError = require('./modules/error');
 const client = require('./utility/database');
 
 const PORT = process.env.PORT || 3000;
@@ -45,7 +44,7 @@ client.connect()
 
 app.get('/', getBooks);
 
-app.get('*', (request, response) => response.status(404).send('This route does not exist'));
+app.get('*', (request, response) => response.status(404).render('./pages/error-view', {error:'(404) Page not found'}));
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 
