@@ -6,7 +6,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const bookHandler = require('./modules/books');
+const bookModule = require('./modules/books');
+const {bookHandler, getBooks} = bookModule;
 const handleError = require('./modules/error');
 const client = require('./utility/database');
 
@@ -42,28 +43,12 @@ client.connect()
     console.error(err);
   });
 
-app.get('/', getTasks);
+app.get('/', getBooks);
 
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 
 
-function getTasks(request, response) {
-  const SQL = 'SELECT * FROM Tasks;';
 
-  client.query(SQL)
-    .then(results => {
-      const { rowcount, rows } = results;
-      console.log(' / db result', rows);
-
-      // response.send('rows')
-      response.render('index', {
-        books: rows
-      });
-    })
-    .catch(err => {
-      handleError(err, response);
-    });
-}
 
