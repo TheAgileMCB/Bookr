@@ -38,8 +38,8 @@ client.connect()
   .then(() => {
     console.log('PG is listening!');
   })
-  .catch((err, response) => {
-    handleError(err, response);
+  .catch((err) => {
+    console.error(err);
   });
 
 app.get('/', getTasks);
