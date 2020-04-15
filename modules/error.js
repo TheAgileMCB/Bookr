@@ -4,8 +4,7 @@ function handleError(err, request, response) {
   let viewModel = {
     error: err,
   };
-  response.status(err.status);
-  response.render('../views/pages/error-view', viewModel);
+  response.status(500).render('../views/pages/error-view', viewModel);
 }
 
 module.exports = handleError;
