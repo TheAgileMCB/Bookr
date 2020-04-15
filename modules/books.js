@@ -57,12 +57,25 @@ function Book(bookStats) {
   this.title = bookStats.volumeInfo.title ? bookStats.volumeInfo.title : 'Title does not exist';
   this.author = bookStats.volumeInfo.authors ? bookStats.volumeInfo.authors : 'Author does not exist';
   this.isbn = bookStats.volumeInfo.industryIdentifiers ? `${bookStats.volumeInfo.industryIdentifiers[0].identifier}` : 'No ISBN available at this time, we are working on setting this up.';
+  // parseIsnb(bookStats...)
   this.summary = bookStats.volumeInfo.description;
-  this.image = bookStats.volumeInfo.imageLinks;
+  this.image = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
+}
 
-  // grab image url and replace http route with https with regex
+const placeHolderImage = 'https://i.imgur.com/J5LVHEL.jpg';
+function parseBookImage(imageLinks) {
+  console.log(imageLinks);
+  if (!imageLinks) {
+    return placeHolderImage;
+  }
+
+  return imageLinks.thumbnail || imageLinks.smallThumbnail || placeHolderImage;
 
 }
+
+// grab image url and replace http route with https with regex
+
+
 
 module.exports = {
   bookHandler,
