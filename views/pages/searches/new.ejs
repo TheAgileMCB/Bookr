@@ -19,22 +19,25 @@
   </header>
   <main id="main-content">
 
-    <form>
+    <form action="/searches" method="post">
       <fieldset>
         <legend>Book Search</legend>
         <label>
           <span>Enter Search Term(s):</span>
           <input type="text" name="searchTerm" />
         </label>
-        <label>
-          <span>Author</span>
-          <input type="radio" id="author" name="radio" value="author" />
-        </label>
+      </fieldset>
+      <fieldset>
         <label>
           <span>Title</span>
           <input type="radio" id="title" name="radio" value="title" checked />
         </label>
+        <label>
+          <span>Author</span>
+          <input type="radio" id="author" name="radio" value="author" />
+        </label>
       </fieldset>
+      <button type="submit">Search the libraries of h umanity!</button>
     </form>
 
   </main>
@@ -42,6 +45,6 @@
     <h3>Contact</h3>
 
   </footer>
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
 </body>
 </html>

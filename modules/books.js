@@ -3,34 +3,23 @@ require('dotenv').config();
 
 const superagent = require('superagent');
 const BOOK_KEY = process.env.BOOK_KEY;
-const titleButton = document.getElementById('title'); //document is not defined because of EJS page
-const authorButton = document.getElementById('author');
-
 
 //queries the API
 function bookHandler(request, response, next) {
   const url = 'https://www.googleapis.com/books/v1/volumes';
-
-  // radio button variable function
-  let searchQuery = () => {
-    if (titleButton.checked) {
-      return `${request.query.title}+intitle`;
-    } else if (authorButton.checked) {
-      return `${request.query.author}+inauthor`;
-    }
-  };
-
   superagent(url)
     .query({
       key: BOOK_KEY,
-      q: searchQuery  //variable to be based on radio button input
+      q: `+in${request.body.radio}:${request.body.searchTerm}`
     })
     .then(bookResponse => {
-      const bookData = bookResponse.body;
+      console.log(response.body);
+      const bookData = bookResponse.body; // JSON.parse(bookResponse.text);
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
       });
       response.send(bookResults);
+      // response.render('pages/searches/show');
     })
     .catch(err => {
       console.error(err);
@@ -43,6 +32,7 @@ function Book(bookStats) {
   this.author = bookStats.volumeInfo.authors ? bookStats.volumeInfo.authors : 'Author does not exist';
 
   // additional constructor data
+  // grab image url and replace http route with https with regex
 
   // this.publicationDate = 'mysteries of the universe',
   // this.ISBN = 

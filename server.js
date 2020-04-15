@@ -4,15 +4,21 @@
 require('dotenv').config();
 
 const express = require('express');
+const pg = require('pg');
 const app = express();
 const cors = require('cors');
 const bookHandler = require('./modules/books');
 
+const PORT = process.env.PORT || 3000;
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', err => { throw err; });
 // set up apps and EJS
 app.use(cors());
 
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('./public'));
 
 app.get('/', (request, response) => {
@@ -28,6 +34,43 @@ app.get('/searches/new', (request, response) => {
 app.post('/searches', bookHandler);
 
 // establish server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-console.log(`heard on ${PORT}`));
+client.connect()
+  .then(() => {
+    console.log('PG is listening!');
+  })
+  .catch((err, response) => {
+    handleError(err, response);
+  });
+
+app.get('/', getTasks);
+
+app.get('*', (request, response) => response.status(404).send('This route does not exist'));
+
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+
+
+function getTasks(request, response) {
+  const SQL = 'SELECT * FROM Tasks;';
+
+  client.query(SQL)
+    .then(results => {
+      const { rowcount, rows } = results;
+      console.log(' / db result', rows);
+
+      // response.send('rows')
+      response.render('index', {
+        books: rows
+      });
+    })
+    .catch(err => {
+      handleError(err, response);
+    });
+}
+
+function handleError(err, response) {
+  let viewModel = {
+    error: err,
+  };
+  response.render('pages/error-view', viewModel);
+}
+
