@@ -21,8 +21,8 @@ function bookHandler(request, response, next) {
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
       });
-      response.send(bookResults);
-      // response.render('pages/searches/show');
+      // response.send(bookResults);
+      response.render('pages/searches/show', {data: bookResults});
     })
     .catch(err => {
       console.error(err);
@@ -41,7 +41,7 @@ function getBooks(request, response) {
       console.log(' / db result', rows);
 
       // response.send('rows')
-      response.render('index', {
+      response.render('/index', {
         books: rows
       });
     })

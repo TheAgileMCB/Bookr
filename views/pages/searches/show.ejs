@@ -12,11 +12,19 @@
   </header>
   <main id="main-content">
 
-  <!-- <% books.forEach -->
+    <% data.forEach(item => {%>
+    <img src="<%= item.image %>"/>
+    <h2><%= item.title %></h2>
+    <h2><%= item.author %></h2>
+    <h2><%= item.summary %></h2>
+    <p><%= item.isbn %></p>
+    <% }) %>
+
+
   </main>
   <footer id="footer">
 
-    <% -include('../../layout/footer') %>
+    <%- include('../../layout/footer') %>
 
   </footer>
 </body>

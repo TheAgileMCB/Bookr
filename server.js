@@ -31,7 +31,7 @@ app.get('/searches/new', (request, response) => {
 });
 
 //renders response of bookHandler
-app.post('/searches', bookHandler);
+app.post('/searches/show', bookHandler);
 
 // establish server
 client.connect()
@@ -41,6 +41,15 @@ client.connect()
   .catch((err) => {
     console.error(err);
   });
+
+//render index
+// {
+//   title: this.title
+//   author: this.author
+//   ISBN: this.ISBN
+//   summary: this.summary
+//   image: this.image
+// }
 
 app.get('/', getBooks);
 
