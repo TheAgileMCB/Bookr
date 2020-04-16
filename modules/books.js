@@ -30,22 +30,20 @@ function getBooksFromApi(request, response, next) {
     });
 }
 
-// function indexHandler(request, response, next) {
-// }
-
-// setBooksToDatabase 
-function favoriteBooks (selectedBook) {
-  const {image, title, author, summary, isbn} = selectedBook;
+function favoriteBookHandler(request, response, next) {
+  const {image, title, author, summary, isbn} = request.body;
   const SQL = `
-  INSERT INTO books (image, title, author, summary, isbn)
+  INSERT INTO books (image_url, title, author, summary, isbn)
   VALUES ($1, $2, $3, $4, $5)
   `;
   const parameters = [image, title, author, summary, isbn];
   return client.query(SQL, parameters)
     .then(result => {
+      response.redirect('/');
       console.log('cachedlocation', result);
     })
     .catch(err => {
+      handleError(err, request, response);
       console.err('failed to handle three partners together', err);
     });
 }
@@ -100,4 +98,5 @@ function parseBookImage(imageLinks) {
 module.exports = {
   getBooksFromApi,
   getBooksFromDb,
+  favoriteBookHandler
 };
