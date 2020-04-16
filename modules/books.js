@@ -8,7 +8,7 @@ const superagent = require('superagent');
 const BOOK_KEY = process.env.BOOK_KEY;
 
 //queries the API
-function bookHandler(request, response, next) {
+function getBooksFromApi(request, response, next) {
   const url = 'https://www.googleapis.com/books/v1/volumes';
   superagent(url)
     .query({
@@ -29,31 +29,44 @@ function bookHandler(request, response, next) {
       next(err);
     });
 }
+function detailHandler(request, response) {
+ const SQL = `
+ SELECT * FROM books WHERE id = $1
 
-// function indexHandler(request, response, next) {
+ `;
+ client.query(SQL, [request.params.id])
+ .then(result => {
+   response.render('pages/detail', {data: result.rows[0]})
   
-// }
+ })
+ .catch(err => {
+  handleError(err, request, response);
+  console.err('failed to handle three partners together', err);
+});
+}
 
-// setBooksToDatabase 
-function favoriteBooks (selectedBook) {
-  const {image, title, author, summary, isbn} = selectedBook;
+function favoriteBookHandler(request, response, next) {
+  const {image, title, author, summary, isbn} = request.body;
   const SQL = `
   INSERT INTO books (image, title, author, summary, isbn)
   VALUES ($1, $2, $3, $4, $5)
+  RETURNING id 
   `;
   const parameters = [image, title, author, summary, isbn];
   return client.query(SQL, parameters)
     .then(result => {
+      response.redirect(`/details/${result.rows[0].id}`);
       console.log('cachedlocation', result);
     })
     .catch(err => {
+      handleError(err, request, response);
       console.err('failed to handle three partners together', err);
     });
 }
 
 
 // get books from database
-function getBooks(request, response) {
+function getBooksFromDb(request, response) {
   const SQL = 'SELECT * FROM books;';
 
   client.query(SQL)
@@ -99,6 +112,8 @@ function parseBookImage(imageLinks) {
 
 
 module.exports = {
-  bookHandler,
-  getBooks,
+  detailHandler,
+  getBooksFromApi,
+  getBooksFromDb,
+  favoriteBookHandler
 };
