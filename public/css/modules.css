@@ -21,6 +21,12 @@
   padding: .5rem;
   border-radius: 2rem;
   border: solid 2px white;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+#book-search button:hover {
+  opacity: 1;
 }
 
 .img-wrapper {
@@ -40,10 +46,16 @@ img {
   background: linear-gradient(to bottom right, rgb(78, 78, 78), rgb(150, 148, 148), rgb(92, 92, 92));
   border-radius: 2rem;
   border: 2px solid white;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.search-button:hover {
+  opacity: 1;
 }
 
 @media(min-width: 500px) {
-  main {
+  body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
@@ -58,5 +70,28 @@ img {
   .search-button {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
+  }
+}
+
+@media(min-width: 700px) {
+  body {
+    grid-template-columns: 1fr 1fr 1fr 1fr
+  }
+
+  header {
+    height: auto;
+    background: url("/img/library-stacks.jg") top;
+    grid-column: 1 / 5;
+    grid-row: 1 / 2;
+  }
+
+  .img-wrapper {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+  }
+
+  .search-button {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
   }
 }

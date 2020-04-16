@@ -6,7 +6,16 @@ html, body {
   min-width: 360px;
   margin: 0 auto;
   text-align: center;
+}
+
+body {
   background: linear-gradient(to bottom right, rgba(65, 156, 192, 0.938), rgba(33, 125, 167, 0.842), rgba(25, 125, 155, 0.74));
+
+}
+
+header {
+  height: 0;
+  margin-bottom: 1rem;
 }
 
 main {
