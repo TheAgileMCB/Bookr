@@ -2,19 +2,17 @@
 <html lang="en-us">
 <head>
 
-  <%- include('../layout/head') %>
+  <%- include('../../layout/head') %>
 </head>
 
 <body>
   <header id="header">
 
-    <%- include('../layout/header') %>
+    <%- include('../../layout/header') %>
     
   </header>
 
-  <main id="main-content">
-
-    <form action="/searches" method="POST">
+    <form id="book-search" action="/searches" method="POST">
       <fieldset>
         <legend>Book Search</legend>
         <label>
@@ -35,10 +33,9 @@
       <button type="submit">Search the libraries of humanity!</button>
     </form>
 
-  </main>
   <footer id="footer">
 
-    <% -include('../layout/footer') %>
+    <%- include('../../layout/footer') %>
 
   </footer>
 </body>

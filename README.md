@@ -20,3 +20,5 @@ DeltaV Code School Intermediate Code 301 Google Books API project
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+Photo by Jonathan Singer on Unsplash
+Photo by Dmitrij Paskevic on Unsplash
