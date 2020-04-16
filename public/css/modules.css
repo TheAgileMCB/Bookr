@@ -1,9 +1,9 @@
 #book-search {
-  padding: 1rem;
+  padding: 1rem .5rem;
   background: linear-gradient(to bottom right, rgb(78, 78, 78), rgb(150, 148, 148), rgb(92, 92, 92));
   border: double 4px white;
   border-radius: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 #book-search legend {
@@ -12,21 +12,25 @@
 }
 
 #book-search fieldset {
-  padding: 1rem;
+  padding: 1rem .5rem;
 }
 
 #book-search button {
   margin: .5rem;
-  font-size: 1.5rem; 
+  font-size: 1.25rem; 
   padding: .5rem;
   border-radius: 2rem;
   border: solid 2px white;
 }
 
+main img {
+  width: 440px;
+}
+
 main li {
   padding: 1rem;
   margin: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   background: linear-gradient(to bottom right, rgb(78, 78, 78), rgb(150, 148, 148), rgb(92, 92, 92));
   border-radius: 2rem;
   border: 2px solid white;
