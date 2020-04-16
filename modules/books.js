@@ -31,12 +31,12 @@ function getBooksFromApi(request, response, next) {
 }
 
 function favoriteBookHandler(request, response, next) {
-  const {image, title, author, summary, isbn} = request.body;
+  const {image_url, title, author, summary, isbn} = request.body;
   const SQL = `
   INSERT INTO books (image_url, title, author, summary, isbn)
   VALUES ($1, $2, $3, $4, $5)
   `;
-  const parameters = [image, title, author, summary, isbn];
+  const parameters = [image_url, title, author, summary, isbn];
   return client.query(SQL, parameters)
     .then(result => {
       response.redirect('/');
@@ -77,7 +77,7 @@ function Book(bookStats) {
   this.isbn = bookStats.volumeInfo.industryIdentifiers ? `${bookStats.volumeInfo.industryIdentifiers[0].identifier}` : 'No ISBN available at this time, we are working on setting this up.';
   // parseIsnb(bookStats...)
   this.summary = bookStats.volumeInfo.description;
-  this.image = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
+  this.image_url = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
 }
 
 const placeHolderImage = 'https://i.imgur.com/J5LVHEL.jpg';
@@ -91,7 +91,7 @@ function parseBookImage(imageLinks) {
 
 }
 
-// grab image url and replace http route with https with regex
+// grab image_url url and replace http route with https with regex
 
 
 
