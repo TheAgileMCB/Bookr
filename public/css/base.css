@@ -2,9 +2,14 @@
   box-sizing: border-box;
 }
 
-html {
-  width: 480px;
+html, body {
+  min-width: 360px;
   margin: 0 auto;
   text-align: center;
   background: linear-gradient(to bottom right, rgba(65, 156, 192, 0.938), rgba(33, 125, 167, 0.842), rgba(25, 125, 155, 0.74));
+}
+
+main {
+  width: 95%;
+  margin: 0 auto;
 }
