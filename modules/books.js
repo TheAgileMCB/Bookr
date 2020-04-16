@@ -29,17 +29,33 @@ function getBooksFromApi(request, response, next) {
       next(err);
     });
 }
+function detailHandler(request, response) {
+ const SQL = `
+ SELECT * FROM books WHERE id = $1
+
+ `;
+ client.query(SQL, [request.params.id])
+ .then(result => {
+   response.render('pages/detail', {data: result.rows[0]})
+  
+ })
+ .catch(err => {
+  handleError(err, request, response);
+  console.err('failed to handle three partners together', err);
+});
+}
 
 function favoriteBookHandler(request, response, next) {
-  const {image_url, title, author, summary, isbn} = request.body;
+  const {image, title, author, summary, isbn} = request.body;
   const SQL = `
-  INSERT INTO books (image_url, title, author, summary, isbn)
+  INSERT INTO books (image, title, author, summary, isbn)
   VALUES ($1, $2, $3, $4, $5)
+  RETURNING id 
   `;
-  const parameters = [image_url, title, author, summary, isbn];
+  const parameters = [image, title, author, summary, isbn];
   return client.query(SQL, parameters)
     .then(result => {
-      response.redirect('/');
+      response.redirect(`/details/${result.rows[0].id}`);
       console.log('cachedlocation', result);
     })
     .catch(err => {
@@ -77,7 +93,7 @@ function Book(bookStats) {
   this.isbn = bookStats.volumeInfo.industryIdentifiers ? `${bookStats.volumeInfo.industryIdentifiers[0].identifier}` : 'No ISBN available at this time, we are working on setting this up.';
   // parseIsnb(bookStats...)
   this.summary = bookStats.volumeInfo.description;
-  this.image_url = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
+  this.image = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
 }
 
 const placeHolderImage = 'https://i.imgur.com/J5LVHEL.jpg';
@@ -91,11 +107,12 @@ function parseBookImage(imageLinks) {
 
 }
 
-// grab image_url url and replace http route with https with regex
+// grab image url and replace http route with https with regex
 
 
 
 module.exports = {
+  detailHandler,
   getBooksFromApi,
   getBooksFromDb,
   favoriteBookHandler

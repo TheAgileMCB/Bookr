@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bookModule = require('./modules/books');
-const {getBooksFromApi, getBooksFromDb, favoriteBookHandler} = bookModule;
+const {detailHandler, getBooksFromApi, getBooksFromDb, favoriteBookHandler} = bookModule;
 const client = require('./utility/database');
 
 const PORT = process.env.PORT || 3000;
@@ -41,7 +41,7 @@ client.connect()
   .catch((err) => {
     console.error(err);
   });
-
+app.get('/details/:id', detailHandler);
 app.post('/books', favoriteBookHandler);
 
 app.get('/', getBooksFromDb);
