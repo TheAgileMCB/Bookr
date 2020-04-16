@@ -42,14 +42,7 @@ client.connect()
     console.error(err);
   });
 
-//render index
-// {
-//   title: this.title
-//   author: this.author
-//   ISBN: this.ISBN
-//   summary: this.summary
-//   image: this.image
-// }
+// app.post('/books', indexHandler)
 
 app.get('/', getBooks);
 

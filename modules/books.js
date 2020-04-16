@@ -30,6 +30,27 @@ function bookHandler(request, response, next) {
     });
 }
 
+// function indexHandler(request, response, next) {
+  
+// }
+
+// setBooksToDatabase 
+function favoriteBooks (selectedBook) {
+  const {image, title, author, summary, isbn} = selectedBook;
+  const SQL = `
+  INSERT INTO books (image, title, author, summary, isbn)
+  VALUES ($1, $2, $3, $4, $5)
+  `;
+  const parameters = [image, title, author, summary, isbn];
+  return client.query(SQL, parameters)
+    .then(result => {
+      console.log('cachedlocation', result);
+    })
+    .catch(err => {
+      console.err('failed to handle three partners together', err);
+    });
+}
+
 
 // get books from database
 function getBooks(request, response) {
