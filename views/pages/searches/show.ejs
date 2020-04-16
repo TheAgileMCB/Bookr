@@ -12,11 +12,28 @@
   </header>
   <main id="main-content">
 
-  <!-- <% books.forEach -->
+    <% data.forEach(item => {%>
+    <img src="<%= item.image %>"/>
+    <h2><%= item.title %></h2>
+    <h2><%= item.author %></h2>
+    <h2><%= item.summary %></h2>
+    <p><%= item.isbn %></p>
+    <form name="ToMakeHappy" action="/books" method="post">
+    <input type="hidden" name="image" value='<%= item.image %>'/>
+    <input type="hidden" name="title" value='<%= item.title %>'/>
+    <input type="hidden" name="author" value='<%= item.author %>'/>
+    <input type="hidden" name="summary" value='<%= item.summary %>'/>
+    <input type="hidden" name="isbn" value='<%= item.isbn %>'/>
+    <input type="submit" value="Save This Book!"/>
+    </form>
+
+    <% }) %>
+
+
   </main>
   <footer id="footer">
 
-    <% -include('../../layout/footer') %>
+    <%- include('../../layout/footer') %>
 
   </footer>
 </body>

@@ -31,7 +31,7 @@ app.get('/searches/new', (request, response) => {
 });
 
 //renders response of bookHandler
-app.post('/searches', bookHandler);
+app.post('/searches/show', bookHandler);
 
 // establish server
 client.connect()
@@ -41,6 +41,8 @@ client.connect()
   .catch((err) => {
     console.error(err);
   });
+
+// app.post('/books', indexHandler)
 
 app.get('/', getBooks);
 

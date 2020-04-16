@@ -21,12 +21,33 @@ function bookHandler(request, response, next) {
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
       });
-      response.send(bookResults);
-      // response.render('pages/searches/show');
+      // response.send(bookResults);
+      response.render('pages/searches/show', {data: bookResults});
     })
     .catch(err => {
       console.error(err);
       next(err);
+    });
+}
+
+// function indexHandler(request, response, next) {
+  
+// }
+
+// setBooksToDatabase 
+function favoriteBooks (selectedBook) {
+  const {image, title, author, summary, isbn} = selectedBook;
+  const SQL = `
+  INSERT INTO books (image, title, author, summary, isbn)
+  VALUES ($1, $2, $3, $4, $5)
+  `;
+  const parameters = [image, title, author, summary, isbn];
+  return client.query(SQL, parameters)
+    .then(result => {
+      console.log('cachedlocation', result);
+    })
+    .catch(err => {
+      console.err('failed to handle three partners together', err);
     });
 }
 
@@ -41,7 +62,7 @@ function getBooks(request, response) {
       console.log(' / db result', rows);
 
       // response.send('rows')
-      response.render('index', {
+      response.render('/index', {
         books: rows
       });
     })
