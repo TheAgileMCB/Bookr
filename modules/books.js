@@ -8,7 +8,7 @@ const superagent = require('superagent');
 const BOOK_KEY = process.env.BOOK_KEY;
 
 //queries the API
-function bookHandler(request, response, next) {
+function getBooksFromApi(request, response, next) {
   const url = 'https://www.googleapis.com/books/v1/volumes';
   superagent(url)
     .query({
@@ -31,7 +31,6 @@ function bookHandler(request, response, next) {
 }
 
 // function indexHandler(request, response, next) {
-  
 // }
 
 // setBooksToDatabase 
@@ -53,7 +52,7 @@ function favoriteBooks (selectedBook) {
 
 
 // get books from database
-function getBooks(request, response) {
+function getBooksFromDb(request, response) {
   const SQL = 'SELECT * FROM books;';
 
   client.query(SQL)
@@ -99,6 +98,6 @@ function parseBookImage(imageLinks) {
 
 
 module.exports = {
-  bookHandler,
-  getBooks,
+  getBooksFromApi,
+  getBooksFromDb,
 };

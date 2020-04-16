@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bookModule = require('./modules/books');
-const {bookHandler, getBooks} = bookModule;
+const {getBooksFromApi, getBooksFromDb} = bookModule;
 const client = require('./utility/database');
 
 const PORT = process.env.PORT || 3000;
@@ -30,8 +30,8 @@ app.get('/searches/new', (request, response) => {
   response.render('pages/searches/new');
 });
 
-//renders response of bookHandler
-app.post('/searches/show', bookHandler);
+//renders response of getBooksFromApi
+app.post('/searches/show', getBooksFromApi);
 
 // establish server
 client.connect()
@@ -44,7 +44,7 @@ client.connect()
 
 // app.post('/books', indexHandler)
 
-app.get('/', getBooks);
+app.get('/', getBooksFromDb);
 
 app.get('*', (request, response) => response.status(404).render('./pages/error-view', {error:'(404) Page not found'}));
 
