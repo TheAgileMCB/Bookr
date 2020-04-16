@@ -24,9 +24,32 @@
   <main id="bookResults">
     <h2>Book Results</h2>
     <section>
-      <ul>
-        <li></li>
-      </ul>
+      <main id="main-content">
+        <h1>Book Results</h1>
+
+        <% data.forEach(favoriteBook => {%>
+          <img src="<%= favoriteBook.image %>"/>
+          <h2><%= favoriteBook.title %></h2>
+          <p><%= favoriteBook.author %></p>
+          <p><%= favoriteBook.summary %></p>
+          <p><%= favoriteBook.isbn %></p>
+
+
+
+
+
+          <form action="/books" method="post">
+          <input type="hidden" name="image" value='<%= favoriteBook.image %>'/>
+          <input type="hidden" name="title" value='<%= favoriteBook.title %>'/>
+          <input type="hidden" name="author" value='<%= favoriteBook.author %>'/>
+          <input type="hidden" name="summary" value='<%= favoriteBook.summary %>'/>
+          <input type="hidden" name="isbn" value='<%= favoriteBook.isbn %>'/>
+          <input type="submit" value="Save This Book!"/>
+          </form>
+      
+          <% }) %>
+      
+      </main>
     </section>
     
 

@@ -41,7 +41,6 @@ function detailHandler(request, response) {
  })
  .catch(err => {
   handleError(err, request, response);
-  console.err('failed to handle three partners together', err);
 });
 }
 
@@ -68,19 +67,15 @@ function favoriteBookHandler(request, response, next) {
 // get books from database
 function getBooksFromDb(request, response) {
   const SQL = `
-  SELECT * FROM books
-  LIMIT 1
+  SELECT * FROM books 
   `;
 
-  client.query(SQL)
+  client.query(SQL, [request.params.id])
 
     .then(results => {
       const { rowcount, rows } = results;
-      console.log(' / db result', rows);
-      // response.send('rows')
-      response.render('/index', {
-        books: rows
-      });
+      console.log(results);
+      response.render('pages/index', {book: results.rows[0]});
     })
     .catch(err => {
       handleError(err, response);
