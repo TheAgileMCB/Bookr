@@ -1,3 +1,10 @@
+/* 
+font-family: 'Girassol', cursive;
+font-family: 'Shadows Into Light', cursive;
+font-family: 'Special Elite', cursive;
+font-family: 'Handlee', cursive; 
+*/
+
 body {
   background: linear-gradient(to bottom right, rgba(117, 3, 3, 0.938), rgba(90, 6, 6, 0.918), rgba(49, 0, 0, 0.952));
 }
@@ -17,3 +24,4 @@ a {
   text-decoration: none;
   color: white;
 }
+
