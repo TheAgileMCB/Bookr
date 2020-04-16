@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <%- include('../layout/head') %>
+</head>
+
+<body>
+  <header id="header">
+
+    <%- include('../layout/header') %>
+
+  </header>
+
+  <div class="img-wrapper">
+    <img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property">
+  </div>
+
+  <button class="search-button">
+    <a href="./searches/new">Search</a>
+  </button>
+
+  <main id="main-content">
+    <h1>The Chosen One</h1>
+    <img src="<%= item.image %>" />
+    <h2> <%= item.title %> </h2>
+    <h3>Author: <%= item.author %></h3>
+    <p>Summary: <%= item.summary %></p>
+    <p>ISBN13: <%= item.isbn %></p>
+
+
+  </main>
+
+  <footer id="footer">
+
+    <%- include('../layout/footer') %>
+
+  </footer>
+</body>
+
+</html>

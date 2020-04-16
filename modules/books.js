@@ -36,7 +36,7 @@ function detailHandler(request, response) {
  `;
  client.query(SQL, [request.params.id])
  .then(result => {
-   response.render('pages/detail', {data: result.rows[0]})
+   response.render('pages/details', {item: result.rows[0]})
   
  })
  .catch(err => {
@@ -67,13 +67,16 @@ function favoriteBookHandler(request, response, next) {
 
 // get books from database
 function getBooksFromDb(request, response) {
-  const SQL = 'SELECT * FROM books;';
+  const SQL = `
+  SELECT * FROM books
+  LIMIT 1
+  `;
 
   client.query(SQL)
+
     .then(results => {
       const { rowcount, rows } = results;
       console.log(' / db result', rows);
-
       // response.send('rows')
       response.render('/index', {
         books: rows
@@ -98,7 +101,6 @@ function Book(bookStats) {
 
 const placeHolderImage = 'https://i.imgur.com/J5LVHEL.jpg';
 function parseBookImage(imageLinks) {
-  console.log(imageLinks);
   if (!imageLinks) {
     return placeHolderImage;
   }

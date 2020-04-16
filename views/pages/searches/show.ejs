@@ -15,8 +15,8 @@
     <% data.forEach(item => {%>
     <img src="<%= item.image %>"/>
     <h2><%= item.title %></h2>
-    <h2><%= item.author %></h2>
-    <h2><%= item.summary %></h2>
+    <p><%= item.author %></p>
+    <p><%= item.summary %></p>
     <p><%= item.isbn %></p>
     <form action="/books" method="post">
     <input type="hidden" name="image" value='<%= item.image %>'/>
