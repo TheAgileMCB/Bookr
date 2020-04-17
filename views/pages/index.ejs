@@ -20,38 +20,34 @@
   <button class="search-button">
     <a href="./searches/new">Search</a>
   </button>
-<section>
-    <h3>Total Books:
-      <%= books.length %>
-    </h3>
-</section>
-  <main id="bookResults">
-    <h2>Book Results</h2>
-    <section>
-      <main id="main-content">
-        <h1>Book Results</h1>
 
-        <% books.forEach(favoriteBook => {%>
-          <img src="<%= favoriteBook.image %>"/>
-          <h2><%= favoriteBook.title %></h2>
-          <p><%= favoriteBook.author %></p>
-          <p><%= favoriteBook.summary %></p>
-          <p><%= favoriteBook.isbn %></p>
-          <form action="/books/<%= favoriteBook.id %>/edit-view" method="get">
-          <input type="hidden" name="image" value='<%= favoriteBook.image %>'/>
-          <input type="hidden" name="title" value='<%= favoriteBook.title %>'/>
-          <input type="hidden" name="author" value='<%= favoriteBook.author %>'/>
-          <input type="hidden" name="summary" value='<%= favoriteBook.summary %>'/>
-          <input type="hidden" name="isbn" value='<%= favoriteBook.isbn %>'/>
-          <input type="submit" value="Update Your Book"/>
-          </form>
-          <% }) %>
-      
-      </main>
-    </section>
-    
+  <section class="counter">
+    <h5>Books:</h5>
+    <h4><%= books.length %></h4>
+  </section>
+
+
+  <main class="main-content">
+    <h2>Your Library</h2>
+
+    <% books.forEach(favoriteBook => {%>
+    <img src="<%= favoriteBook.image %>" />
+    <h2><%= favoriteBook.title %></h2>
+    <p><%= favoriteBook.author %></p>
+    <p><%= favoriteBook.summary %></p>
+    <p><%= favoriteBook.isbn %></p>
+    <form action="/books/<%= favoriteBook.id %>/edit-view" method="get">
+      <input type="hidden" name="image" value='<%= favoriteBook.image %>' />
+      <input type="hidden" name="title" value='<%= favoriteBook.title %>' />
+      <input type="hidden" name="author" value='<%= favoriteBook.author %>' />
+      <input type="hidden" name="summary" value='<%= favoriteBook.summary %>' />
+      <input type="hidden" name="isbn" value='<%= favoriteBook.isbn %>' />
+      <input type="submit" value="Update Your Book" />
+    </form>
+    <% }) %>
 
   </main>
+
 
   <footer id="footer">
 
