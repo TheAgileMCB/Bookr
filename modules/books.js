@@ -22,7 +22,7 @@ function getBooksFromApi(request, response, next) {
         return new Book(bookStats);
       });
       // response.send(bookResults);
-      response.render('pages/searches/show', {data: bookResults});
+      response.render('pages/searches/show', { data: bookResults });
     })
     .catch(err => {
       console.error(err);
@@ -30,22 +30,22 @@ function getBooksFromApi(request, response, next) {
     });
 }
 function detailHandler(request, response) {
- const SQL = `
+  const SQL = `
  SELECT * FROM books WHERE id = $1
 
  `;
- client.query(SQL, [request.params.id])
- .then(result => {
-   response.render('pages/details', {item: result.rows[0]})
-  
- })
- .catch(err => {
-  handleError(err, request, response);
-});
+  client.query(SQL, [request.params.id])
+    .then(result => {
+      response.render('pages/details', { item: result.rows[0] })
+
+    })
+    .catch(err => {
+      handleError(err, request, response);
+    });
 }
 
 function favoriteBookHandler(request, response, next) {
-  const {image, title, author, summary, isbn} = request.body;
+  const { image, title, author, summary, isbn } = request.body;
   const SQL = `
   INSERT INTO books (image, title, author, summary, isbn)
   VALUES ($1, $2, $3, $4, $5)
@@ -75,7 +75,8 @@ function getBooksFromDb(request, response) {
     .then(results => {
       const { rowcount, rows } = results;
       console.log(results);
-      response.render('pages/index', {books: rows});
+      response.render('pages/index', { books: rows});
+      
     })
     .catch(err => {
       handleError(err, response);
@@ -101,11 +102,7 @@ function parseBookImage(imageLinks) {
   }
 
   return imageLinks.thumbnail || imageLinks.smallThumbnail || placeHolderImage;
-
 }
-
-// grab image url and replace http route with https with regex
-
 
 
 module.exports = {
