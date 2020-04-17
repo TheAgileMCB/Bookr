@@ -41,7 +41,6 @@ function detailHandler(request, response) {
  })
  .catch(err => {
   handleError(err, request, response);
-  console.err('failed to handle three partners together', err);
 });
 }
 
@@ -69,18 +68,14 @@ function favoriteBookHandler(request, response, next) {
 function getBooksFromDb(request, response) {
   const SQL = `
   SELECT * FROM books
-  LIMIT 1
   `;
 
   client.query(SQL)
 
     .then(results => {
       const { rowcount, rows } = results;
-      console.log(' / db result', rows);
-      // response.send('rows')
-      response.render('/index', {
-        books: rows
-      });
+      console.log(results);
+      response.render('pages/index', {books: rows});
     })
     .catch(err => {
       handleError(err, response);
