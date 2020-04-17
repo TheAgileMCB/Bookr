@@ -85,17 +85,20 @@
     grid-column: 1 / 2;
     grid-row: 4 / 6;
   }
+  footer a {
+    display: block;
+  }
 }
 
 @media(min-width: 700px) {
   body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 150px auto;
+    grid-template-rows: 200px auto;
   }
 
   header {
     height: auto;
-    background: url("/img/library-shelves.jpg") left;
+    background: url("/img/library-shelves.jpg") right;
     border-bottom: double 6px goldenrod;
     grid-column: 1 / 5;
     grid-row: 1 / 2;

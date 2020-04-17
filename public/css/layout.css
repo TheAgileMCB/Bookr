@@ -13,14 +13,38 @@ main {
   text-align: center;
 }
 
+footer a {
+  display: inline-block;
+  color: goldenrod;
+}
+
+footer a:hover {
+  color: black;
+  border: 1px solid goldenrod;
+}
+
 h1 {
   font-size: 6rem;
   color: white;
   text-align: center;
   padding: 2rem;
+  font-family: 'Special Elite', cursive;
+}
+
+h2 {
+  font-size: 2rem;
+  color: white;
+  margin: .5rem;
+  font-family: 'Special Elite', cursive;
+}
+
+p {
+  font-family: 'Shadows Into Light', cursive;
+  margin: .5rem;
 }
 
 a {
+  font-family: 'Shadows Into Light', cursive;
   text-decoration: none;
   color: white;
 }
