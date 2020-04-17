@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <%- include('../layout/head') %>
+</head>
+
+<body>
+    <header id="header">
+
+        <%- include('../layout/header') %>
+
+    </header>
+    <main id="main-content">
+        <img src="<%= book.image %>" />
+        <h2><%= book.title %></h2>
+        <p>Author: <%= book.author %></p>
+        <p>ISBN: <%= book.isbn %></p>
+        <form action="/books/<%= book.id %>/edit-view?_method=PUT" method="POST">
+            <input type="hidden" name="image" value='<%= book.image %>' />
+            <input type="hidden" name="title" value='<%= book.title %>' />
+            <input type="hidden" name="author" value='<%= book.author %>' />
+            <input type="text" name="summary" value='<%= book.summary %>' />
+            <input type="text" name="bookshelf" placeholder="Add a bookshelf" value='<%= book.bookshelf %>' />
+            <input type="submit" value="Update Your BookShelf" />
+        </form>
+
+
+    </main>
+    <footer id="footer">
+
+        <%- include('../layout/footer') %>
+
+    </footer>
+</body>
+
+</html>
