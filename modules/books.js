@@ -67,15 +67,15 @@ function favoriteBookHandler(request, response, next) {
 // get books from database
 function getBooksFromDb(request, response) {
   const SQL = `
-  SELECT * FROM books 
+  SELECT * FROM books
   `;
 
-  client.query(SQL, [request.params.id])
+  client.query(SQL)
 
     .then(results => {
       const { rowcount, rows } = results;
       console.log(results);
-      response.render('pages/index', {book: results.rows[0]});
+      response.render('pages/index', {books: rows});
     })
     .catch(err => {
       handleError(err, response);

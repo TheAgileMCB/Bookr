@@ -21,9 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('./public'));
 
-app.get('/', (request, response) => {
-  response.render('pages/index');
-});
+app.get('/', getBooksFromDb);
+
 
 //renders book search form
 app.get('/searches/new', (request, response) => {
@@ -44,7 +43,6 @@ client.connect()
 app.get('/details/:id', detailHandler);
 app.post('/books', favoriteBookHandler);
 
-app.get('/', getBooksFromDb);
 
 app.get('*', (request, response) => response.status(404).render('./pages/error-view', {error:'(404) Page not found'}));
 
