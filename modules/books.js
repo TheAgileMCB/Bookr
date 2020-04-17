@@ -16,7 +16,7 @@ function getBooksFromApi(request, response, next) {
       q: `+in${request.body.radio}:${request.body.searchTerm}`
     })
     .then(bookResponse => {
-      console.log(response.body);
+      
       const bookData = bookResponse.body; // JSON.parse(bookResponse.text);
       const bookResults = bookData.items.map(bookStats => {
         return new Book(bookStats);
@@ -36,7 +36,7 @@ function detailHandler(request, response) {
  `;
   client.query(SQL, [request.params.id])
     .then(result => {
-      response.render('pages/details', { item: result.rows[0] })
+      response.render('pages/details', { book: result.rows[0] })
 
     })
     .catch(err => {
@@ -55,7 +55,7 @@ function favoriteBookHandler(request, response, next) {
   return client.query(SQL, parameters)
     .then(result => {
       response.redirect(`/details/${result.rows[0].id}`);
-      console.log('cachedlocation', result);
+      // console.log('cachedlocation', result);
     })
     .catch(err => {
       handleError(err, request, response);
@@ -72,16 +72,50 @@ function getBooksFromDb(request, response) {
 
   client.query(SQL)
 
-    .then(results => {
-      const { rowcount, rows } = results;
-      console.log(results);
-      response.render('pages/index', { books: rows});
+    .then(result => {
+      // console.log(result);
+      response.render('pages/index', { books: result.rows});
       
     })
     .catch(err => {
       handleError(err, response);
     });
 }
+
+
+
+function editBookshelf(request,response){
+const SQL = `
+SELECT *
+FROM books
+WHERE Id = $1
+`;
+client.query(SQL, [request.params.book_id])
+.then(results => {
+  const viewModel = {
+   book: results.rows[0]
+  };
+  response.render('pages/edit-view', viewModel);
+})
+}
+
+function updateBookshelf(request,response, next) {
+  const { summary, bookshelf } = request.body;
+  console.log(request.body);
+  const SQL = `
+  UPDATE books SET
+  summary = $1,
+  bookshelf = $2
+  WHERE Id = $3
+`;
+const parameters = [summary, bookshelf, parseInt(request.params.book_id)];
+client.query(SQL, parameters)
+.then(() => {
+  response.redirect(`/details/${request.params.book_id}`);
+})
+.catch(next);
+}
+
 
 
 
@@ -93,6 +127,7 @@ function Book(bookStats) {
   // parseIsnb(bookStats...)
   this.summary = bookStats.volumeInfo.description;
   this.image = parseBookImage(bookStats.volumeInfo.imageLinks).replace('http:', 'https:');
+  // this.bookshelf = null;
 }
 
 const placeHolderImage = 'https://i.imgur.com/J5LVHEL.jpg';
@@ -109,5 +144,7 @@ module.exports = {
   detailHandler,
   getBooksFromApi,
   getBooksFromDb,
-  favoriteBookHandler
+  favoriteBookHandler,
+  editBookshelf,
+  updateBookshelf
 };

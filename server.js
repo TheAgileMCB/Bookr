@@ -7,9 +7,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bookModule = require('./modules/books');
-const {detailHandler, getBooksFromApi, getBooksFromDb, favoriteBookHandler} = bookModule;
+const {detailHandler, getBooksFromApi, getBooksFromDb, favoriteBookHandler, editBookshelf, updateBookshelf} = bookModule;
 const client = require('./utility/database');
-
+const methodOverride = require('method-override');
 const PORT = process.env.PORT || 3000;
 
 // set up apps and EJS
@@ -20,8 +20,13 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('./public'));
+app.use(methodOverride('_method'));
 
 app.get('/', getBooksFromDb);
+
+app.put('/books/:book_id/edit-view', updateBookshelf);
+
+
 
 
 //renders book search form
@@ -42,6 +47,11 @@ client.connect()
   });
 app.get('/details/:id', detailHandler);
 app.post('/books', favoriteBookHandler);
+
+
+
+app.get('/books/:book_id/edit-view', editBookshelf);
+
 
 
 app.get('*', (request, response) => response.status(404).render('./pages/error-view', {error:'(404) Page not found'}));
