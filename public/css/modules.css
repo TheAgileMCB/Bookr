@@ -81,16 +81,25 @@
     grid-column: 1 / 2;
     grid-row: 3 / 4;
   }
+
+  .counter {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+
   #book-search {
     grid-column: 1 / 4;
-    grid-row: 2 / 3;
+    grid-row: 1 / 3;
   }
   footer {
+    margin: 0 auto;
     grid-column: 1 / 2;
     grid-row: 4 / 6;
   }
   footer a {
     display: block;
+    font-size: 2rem;
+    margin: 1rem;
   }
 }
 
@@ -117,13 +126,18 @@
     grid-column: 1 / 2;
     grid-row: 3 / 4;
   }
+
   #book-search {
     grid-column: 2 / 4;
-    grid-row: 3 / 4;
+    grid-row: 2 / 4;
   }
 
   footer {
-    grid-column: 1;
-    grid-row: 4 / 6;
+    grid-column: 1 / 5;
+    grid-row: auto;
+  }
+
+  footer a {
+    display: inline-block;
   }
 }
