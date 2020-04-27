@@ -25,6 +25,10 @@
             <input type="text" name="bookshelf" placeholder="Add a bookshelf" value='<%= book.bookshelf %>' />
             <input type="submit" value="Update Your BookShelf" />
         </form>
+        <form action="/books/<%= book.id %>/edit-view?_method=DELETE" method="POST">
+            <input type="hidden" name="redirectUrl" value="/">
+            <button class="button">Remove from Bookshelf</button>
+        </form>
 
 
     </main>

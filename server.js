@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bookModule = require('./modules/books');
-const {detailHandler, getBooksFromApi, getBooksFromDb, favoriteBookHandler, editBookshelf, updateBookshelf} = bookModule;
+const {detailHandler, getBooksFromApi, getBooksFromDb, favoriteBookHandler, editBookshelf, updateBookshelf, deleteBook} = bookModule;
 const client = require('./utility/database');
 const methodOverride = require('method-override');
 const PORT = process.env.PORT || 3000;
@@ -47,6 +47,7 @@ client.connect()
   });
 app.get('/details/:id', detailHandler);
 app.post('/books', favoriteBookHandler);
+app.delete('/books/:book_id/edit-view', deleteBook);
 
 
 
