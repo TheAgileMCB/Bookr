@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head>
 
+<head>
   <%- include('../../layout/head') %>
 </head>
 
-<body>
-  <header id="header">
+<div class="content-wrapper">
 
-    <%- include('../../layout/header') %>
-    
-  </header>
+  <body>
 
-    <form id="book-search" action="/searches/show" method="POST">
-      <fieldset>
-        <legend>Book Search</legend>
-        <label>
-          <span>Enter Search Term(s):</span>
-          <input type="text" name="searchTerm" placeholder="Search by title or author here!" required/>
-        </label>
-      </fieldset>
-      <fieldset>
-        <label>
-          <span>Title</span>
-          <input type="radio" id="title" name="radio" value="title" checked />
-        </label>
-        <label>
-          <span>Author</span>
-          <input type="radio" id="author" name="radio" value="author" />
-        </label>
-      </fieldset>
-      <button type="submit">Search the libraries of humanity!</button>
-    </form>
+    <header id="header">
+      <%- include('../../layout/header') %>
+    </header>
 
-  <footer id="footer">
+    <main class="main-content">
 
-    <%- include('../../layout/footer') %>
+      <form id="book-search" action="/searches/show" method="POST">
+        <fieldset>
+          <legend>Book Search</legend>
+          <label>
+            <span>Enter Search Term(s):</span>
+            <input type="text" name="searchTerm" placeholder="Search by title or author here!" required />
+          </label>
+        </fieldset>
+        <fieldset>
+          <label>
+            <span>Title</span>
+            <input type="radio" id="title" name="radio" value="title" checked />
+          </label>
+          <label>
+            <span>Author</span>
+            <input type="radio" id="author" name="radio" value="author" />
+          </label>
+        </fieldset>
+        <button type="submit">Search the libraries of humanity!</button>
+      </form>
 
-  </footer>
-</body>
+    </main>
+
+    <footer id="footer">
+      <%- include('../../layout/footer') %>
+    </footer>
+
+  </body>
+
+</div>
+
 </html>

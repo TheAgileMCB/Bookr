@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
 
-    <%- include('../../layout/head') %>
-  </head>
-<body>
-  <header id="header">
+<head>
+  <%- include('../../layout/head') %>
+</head>
 
-    <%- include('../../layout/header') %>
-    
-  </header>
-  <main id="main-content">
+<div class="content-wrapper">
 
-    <% data.forEach(item => {%>
-    <img src="<%= item.image %>"/>
-    <h2><%= item.title %></h2>
-    <p><%= item.author %></p>
-    <p><%= item.summary %></p>
-    <p><%= item.isbn %></p>
-    <form action="/books" method="post">
-    <input type="hidden" name="image" value='<%= item.image %>'/>
-    <input type="hidden" name="title" value='<%= item.title %>'/>
-    <input type="hidden" name="author" value='<%= item.author %>'/>
-    <input type="hidden" name="summary" value='<%= item.summary %>'/>
-    <input type="hidden" name="isbn" value='<%= item.isbn %>'/>
-    <input type="submit" value="Save This Book!"/>
-    </form>
+  <body>
 
-    <% }) %>
+    <header id="header">
+      <%- include('../../layout/header') %>
+    </header>
 
+    <main id="main-content">
 
-  </main>
-  <footer id="footer">
+      <% data.forEach(item => {%>
 
-    <%- include('../../layout/footer') %>
+        <article class="book dashed">
 
-  </footer>
-</body>
+      <img src="<%= item.image %>" />
+      <h3><%= item.title %></h3>
+      <h6><%= item.author %></h6>
+      <p><span>Summary:</span> <%= item.summary %></p>
+      <p><span>ISBN:</span> <%= item.isbn %></p>
+      <form action="/books" method="post">
+        <input type="hidden" name="image" value='<%= item.image %>' />
+        <input type="hidden" name="title" value='<%= item.title %>' />
+        <input type="hidden" name="author" value='<%= item.author %>' />
+        <input type="hidden" name="summary" value='<%= item.summary %>' />
+        <input type="hidden" name="isbn" value='<%= item.isbn %>' />
+        <input class="button" type="submit" value="Save This Book!" />
+      </form>
+
+      </article>
+
+      <% }) %>
+
+    </main>
+
+    <footer id="footer">
+      <%- include('../../layout/footer') %>
+    </footer>
+
+  </body>
+
+</div>
+
 </html>

@@ -10,7 +10,12 @@ html, body {
 
 header {
   height: 0;
-  margin-bottom: 1rem;
+}
+
+.content-wrapper {
+  background: linear-gradient(to bottom right, rgba(117, 3, 3, 0.938), rgba(90, 6, 6, 0.918), rgba(49, 0, 0, 0.952));
+  min-height: 100vh;
+  padding-top: 1em;
 }
 
 main {

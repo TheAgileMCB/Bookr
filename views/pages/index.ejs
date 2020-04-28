@@ -6,54 +6,62 @@
   <%- include('../layout/head') %>
 </head>
 
-<body>
-  <header id="header">
+<div class="content-wrapper">
 
-    <%- include('../layout/header') %>
+  <body>
 
-  </header>
+    <header id="header">
+      <%- include('../layout/header') %>
+    </header>
 
-  <div class="img-wrapper">
-    <img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property">
-  </div>
+    <div class="bookr-bar">
 
-  <button class="search-button">
-    <a href="./searches/new">Search</a>
-  </button>
+      <div class="img-wrapper">
+        <a href="/"><img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property"></a>
+      </div>
 
-  <section class="counter">
-    <h5>Books:</h5>
-    <h4><%= books.length %></h4>
-  </section>
+      <button class="search-button">
+        <a href="./searches/new">Search</a>
+      </button>
 
+      <section class="counter dashed">
+        <h5>Books:</h5>
+        <h4><%= books.length %></h4>
+      </section>
 
-  <main class="main-content">
+    </div>
+    
     <h2>Your Library</h2>
 
-    <% books.forEach(favoriteBook => {%>
-    <img src="<%= favoriteBook.image %>" />
-    <h2><%= favoriteBook.title %></h2>
-    <p><%= favoriteBook.author %></p>
-    <p><%= favoriteBook.summary %></p>
-    <p><%= favoriteBook.isbn %></p>
-    <form action="/books/<%= favoriteBook.id %>/edit-view" method="get">
-      <input type="hidden" name="image" value='<%= favoriteBook.image %>' />
-      <input type="hidden" name="title" value='<%= favoriteBook.title %>' />
-      <input type="hidden" name="author" value='<%= favoriteBook.author %>' />
-      <input type="hidden" name="summary" value='<%= favoriteBook.summary %>' />
-      <input type="hidden" name="isbn" value='<%= favoriteBook.isbn %>' />
-      <input type="submit" value="Update Your Book" />
-    </form>
-    <% }) %>
+    <main class="main-content">
 
-  </main>
+      <% books.forEach(favoriteBook => {%>
+        <article class="book dashed">
+      <img src="<%= favoriteBook.image %>" />
+      <h3><%= favoriteBook.title %></h3>
+      <h6><%= favoriteBook.author %></h6>
+      <p><span>Summary:</span> <%= favoriteBook.summary %></p>
+      <p><span>ISBN:</span> <%= favoriteBook.isbn %></p>
+      <p><span>Bookshelf:</span> <%= favoriteBook.bookshelf %> </p>
+      <form action="/books/<%= favoriteBook.id %>/edit-view" method="get">
+        <input type="hidden" name="image" value='<%= favoriteBook.image %>' />
+        <input type="hidden" name="title" value='<%= favoriteBook.title %>' />
+        <input type="hidden" name="author" value='<%= favoriteBook.author %>' />
+        <input type="hidden" name="summary" value='<%= favoriteBook.summary %>' />
+        <input type="hidden" name="isbn" value='<%= favoriteBook.isbn %>' />
+        <input class="button" type="submit" value="Update Your Book" />
+      </form>
+    </article>
+      <% }) %>
 
+    </main>
 
-  <footer id="footer">
+    <footer id="footer">
+      <%- include('../layout/footer') %>
+    </footer>
 
-    <%- include('../layout/footer') %>
+  </body>
 
-  </footer>
-</body>
+</div>
 
 </html>

@@ -6,37 +6,45 @@
     <%- include('../layout/head') %>
 </head>
 
-<body>
-    <header id="header">
+<div class="content-wrapper">
 
-        <%- include('../layout/header') %>
+    <body>
 
-    </header>
-    <main id="main-content">
-        <img src="<%= book.image %>" />
-        <h2><%= book.title %></h2>
-        <p>Author: <%= book.author %></p>
-        <p>ISBN: <%= book.isbn %></p>
-        <form action="/books/<%= book.id %>/edit-view?_method=PUT" method="POST">
-            <input type="hidden" name="image" value='<%= book.image %>' />
-            <input type="hidden" name="title" value='<%= book.title %>' />
-            <input type="hidden" name="author" value='<%= book.author %>' />
-            <input type="text" name="summary" value='<%= book.summary %>' />
-            <input type="text" name="bookshelf" placeholder="Add a bookshelf" value='<%= book.bookshelf %>' />
-            <input type="submit" value="Update Your BookShelf" />
-        </form>
-        <form action="/books/<%= book.id %>/edit-view?_method=DELETE" method="POST">
-            <input type="hidden" name="redirectUrl" value="/">
-            <button class="button">Remove from Bookshelf</button>
-        </form>
+        <header id="header">
+            <%- include('../layout/header') %>
+        </header>
 
+        <main id="main-content">
 
-    </main>
-    <footer id="footer">
+            <article class="book dashed">
 
-        <%- include('../layout/footer') %>
+            <img src="<%= book.image %>" />
+            <h3><%= book.title %></h3>
+            <h6><%= book.author %></h6>
+            <p><span>ISBN:</span> <%= book.isbn %></p>
+            <form action="/books/<%= book.id %>/edit-view?_method=PUT" method="POST">
+                <input type="hidden" name="image" value='<%= book.image %>' />
+                <input type="hidden" name="title" value='<%= book.title %>' />
+                <input type="hidden" name="author" value='<%= book.author %>' />
+                <p><span>Summary: </span></p><input type="text" name="summary" value='<%= book.summary %>' />
+                <p><span>Bookshelf: </span></p><input type="text" name="bookshelf" placeholder="Add a bookshelf" value='<%= book.bookshelf %>' />
+                <input class="button" type="submit" value="Update Your BookShelf" />
+            </form>
+            <form action="/books/<%= book.id %>/edit-view?_method=DELETE" method="POST">
+                <input type="hidden" name="redirectUrl" value="/">
+                <button class="button">Remove from Bookshelf</button>
+            </form>
 
-    </footer>
-</body>
+            </article>
+
+        </main>
+
+        <footer id="footer">
+            <%- include('../layout/footer') %>
+        </footer>
+
+    </body>
+
+</div>
 
 </html>
