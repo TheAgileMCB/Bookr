@@ -41,3 +41,9 @@
   display: inline-block;
   margin: 0;
 }
+
+@media(min-width: 600px) {
+  .new {
+    margin: 0 auto;
+  }
+}
