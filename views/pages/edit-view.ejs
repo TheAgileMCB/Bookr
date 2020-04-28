@@ -26,7 +26,8 @@
                 <input type="hidden" name="image" value='<%= book.image %>' />
                 <input type="hidden" name="title" value='<%= book.title %>' />
                 <input type="hidden" name="author" value='<%= book.author %>' />
-                <p><span>Summary: </span></p><input type="text" name="summary" value='<%= book.summary %>' />
+                <p><span>Summary: </span> <%= book.summary %></p>
+                <input type="text" name="summary" value='<%= book.summary %>' />
                 <p><span>Bookshelf: </span></p><input type="text" name="bookshelf" placeholder="Add a bookshelf" value='<%= book.bookshelf %>' />
                 <input class="button" type="submit" value="Update Your BookShelf" />
             </form>
