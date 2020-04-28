@@ -185,8 +185,9 @@ form input {
   }
 
   .main-content {
-    margin-left: 275px;
+    margin-left: 250px;
     max-width: calc(100vw - 275px);
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(500px, 1fr) );
     grid-gap: 30px;
