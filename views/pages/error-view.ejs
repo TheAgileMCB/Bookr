@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
 
-    <%- include('../layout/head') %>
-  </head>
-<body>
-  <header id="header">
+<head>
+  <%- include('../layout/head') %>
+</head>
 
-    <%- include('../layout/header') %>
+<div class="content-wrapper">
+
+  <body>
+
+    <header id="header">
+      <%- include('../layout/header') %>
+    </header>
     
-  </header>
-  <main id="main-content">
+    <main id="main-content">
 
-    <p> <%= error %>
-    </p>
+      <p> <%= error %>
+      </p>
 
-  </main>
-  <footer id="footer">
+    </main>
+    <footer id="footer">
+      <%- include('../layout/footer') %>
+    </footer>
 
-    <%- include('../layout/footer') %>
+  </body>
 
-  </footer>
-</body>
+</div>
+
 </html>

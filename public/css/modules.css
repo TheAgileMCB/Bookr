@@ -1,25 +1,32 @@
 #book-search {
-  padding: 1rem .5rem;
+  padding: 1em .5em;
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: 700;
   background: linear-gradient(to bottom right, rgba(192, 142, 15, 0.904), rgba(230, 185, 71, 0.911), rgba(172, 125, 7, 0.911));
   border: double 4px white;
-  border-radius: 2rem;
-  font-size: 1.25rem;
+  border-radius: 2em;
+  font-size: 1.5em;
+  margin-bottom: 125px;
 }
 
 #book-search legend {
-  font-size: 2rem;
+  font-size: 2em;
   text-transform: capitalize;
+  font-family: 'Special Elite', cursive;
+  font-weight: 500;
 }
 
 #book-search fieldset {
-  padding: 1rem .5rem;
+  padding: 1em .5em;
 }
 
 #book-search button {
-  margin: .5rem;
-  font-size: 1.25rem; 
-  padding: .5rem;
-  border-radius: 2rem;
+  margin: .5em;
+  font-size: 1em; 
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: 700;
+  padding: .5em;
+  border-radius: 2em;
   background: linear-gradient(to bottom right, rgba(192, 142, 15, 0.904), rgba(230, 185, 71, 0.911), rgba(172, 125, 7, 0.911));
   border: outset 4px white;
   opacity: 0.6;
@@ -30,114 +37,7 @@
   opacity: 1;
 }
 
-.img-wrapper {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.img-wrapper img {
-  width: 100%;
-}
-
-.search-button {
-  padding: 1rem;
-  margin: 1rem;
-  font-size: 1.25rem;
-  text-transform: capitalize;
-  background: linear-gradient(to bottom right, rgba(192, 142, 15, 0.904), rgba(230, 185, 71, 0.911), rgba(172, 125, 7, 0.911));
-  border-radius: 2rem;
-  border: 2px solid white;
-  opacity: 0.6;
-  transition: 0.3s;
-}
-
-.search-button:hover {
-  opacity: 1;
-}
-
-@media(min-width: 500px) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 1rem;
-  }
-
-  main {
-    grid-column: 2 / 4;
-    grid-row: 2 / auto;
-  }
-
-  /* article {
-
-  } */
-
-  .img-wrapper {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-  }
-
-  .search-button {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  .counter {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-  }
-
-  #book-search {
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
-  }
-  footer {
-    margin: 0 auto;
-    grid-column: 1 / 2;
-    grid-row: 4 / 6;
-  }
-  footer a {
-    display: block;
-    font-size: 2rem;
-    margin: 1rem;
-  }
-}
-
-@media(min-width: 700px) {
-  body {
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-    grid-template-rows: 200px auto;
-  }
-
-  header {
-    height: auto;
-    background: url("/img/library-shelves.jpg") right;
-    border-bottom: double 6px goldenrod;
-    grid-column: 1 / 5;
-    grid-row: 1 / 2;
-  }
-
-  .img-wrapper {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-  }
-
-  .search-button {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  #book-search {
-    grid-column: 2 / 4;
-    grid-row: 2 / 4;
-  }
-
-  footer {
-    grid-column: 1 / 5;
-    grid-row: auto;
-  }
-
-  footer a {
-    display: inline-block;
-  }
+#book-search #title, #book-search #author {
+  display: inline-block;
+  margin: 0;
 }

@@ -116,6 +116,17 @@ client.query(SQL, parameters)
 .catch(next);
 }
 
+function deleteBook(request, response) {
+  console.log(request.params);
+  const SQL = `
+  DELETE FROM books
+  WHERE id = $1
+  `;
+
+  client.query(SQL, [request.params.book_id])
+  .then(() => response.redirect(request.body.redirectUrl || '/'))
+  .catch(err => handleError(err, request, response));
+}
 
 
 
@@ -146,5 +157,6 @@ module.exports = {
   getBooksFromDb,
   favoriteBookHandler,
   editBookshelf,
-  updateBookshelf
+  updateBookshelf,
+  deleteBook
 };

@@ -2,40 +2,48 @@
 <html lang="en-us">
 
 <head>
-
   <%- include('../layout/head') %>
 </head>
 
-<body>
-  <header id="header">
+<div class="content-wrapper">
 
-    <%- include('../layout/header') %>
+  <body>
 
-  </header>
+    <header id="header">
+      <%- include('../layout/header') %>
+    </header>
 
-  <div class="img-wrapper">
-    <img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property">
-  </div>
+    <div class="img-wrapper">
+      <a href="/"><img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property"></a>
+    </div>
 
-  <button class="search-button">
-    <a href="/searches/new">Search</a>
-  </button>
+    <button class="search-button">
+      <a href="/searches/new">Search</a>
+    </button>
 
-  <main id="main-content">
-    <h2>The Chosen One</h2>
-    <img src="<%= book.image %>" />
-    <h2> <%= book.title %> </h2>
-    <h3>Author: <%= book.author %></h3>
-    <p>Summary: <%= book.summary %></p>
-    <p>ISBN13: <%= book.isbn %></p>
-    <p>Bookshelf:<%= book.bookshelf %> </p>
-  </main>
+    <main id="main-content">
 
-  <footer id="footer">
+      <h2>The Chosen One</h2>
 
-    <%- include('../layout/footer') %>
+      <article class="book dashed">
 
-  </footer>
-</body>
+      <img src="<%= book.image %>" />
+      <h3> <%= book.title %> </h3>
+      <h6><%= book.author %></h6>
+      <p>Summary: <%= book.summary %></p>
+      <p>ISBN: <%= book.isbn %></p>
+      <p>Bookshelf:<%= book.bookshelf %> </p>
+
+      </article>
+
+    </main>
+
+    <footer id="footer">
+      <%- include('../layout/footer') %>
+    </footer>
+
+  </body>
+
+</div>
 
 </html>
