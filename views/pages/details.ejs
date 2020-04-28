@@ -13,13 +13,17 @@
       <%- include('../layout/header') %>
     </header>
 
-    <div class="img-wrapper">
-      <a href="/"><img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property"></a>
-    </div>
+    <div class="bookr-bar">
 
-    <button class="search-button">
-      <a href="/searches/new">Search</a>
-    </button>
+      <div class="img-wrapper">
+        <a href="/"><img src="/img/bookr-home.png" alt="A Troiano-Barnhart Property"></a>
+      </div>
+
+      <button class="search-button">
+        <a href="/searches/new">Search</a>
+      </button>
+
+    </div>
 
     <main id="main-content">
 
@@ -27,12 +31,12 @@
 
       <article class="book dashed">
 
-      <img src="<%= book.image %>" />
-      <h3> <%= book.title %> </h3>
-      <h6><%= book.author %></h6>
-      <p>Summary: <%= book.summary %></p>
-      <p>ISBN: <%= book.isbn %></p>
-      <p>Bookshelf:<%= book.bookshelf %> </p>
+        <img src="<%= book.image %>" />
+        <h3> <%= book.title %> </h3>
+        <h6><%= book.author %></h6>
+        <p>Summary: <%= book.summary %></p>
+        <p>ISBN: <%= book.isbn %></p>
+        <p>Bookshelf:<%= book.bookshelf %> </p>
 
       </article>
 
